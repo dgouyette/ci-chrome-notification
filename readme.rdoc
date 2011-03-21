@@ -1,5 +1,10 @@
 = Introduction
 
+Cette extension pour le navigateur google chrome permet de d'être notifié des changements d'états d'un ou plusieurs builds (liste à cocher) se trouvant sur un serveur d'intégration continue.
+Ce plugin fonctionne à la fois avec Jenkins et avec hudson (du moins pour le moment).
+
+
+
 == Utiliser la version non empaquetée
 
 Récupérer les sources : 
