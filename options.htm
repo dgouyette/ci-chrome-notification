@@ -1,0 +1,106 @@
+<html>
+<head>
+    <script src='jquery-1.5.1.min.js'></script>
+    <script type="text/javascript">
+      var req;
+      var jobs =[];
+      var data;
+
+      function save_options() {
+        localStorage.timeToRefresh =$('#timeToRefresh').val(); 
+        localStorage.urlCI = $('#urlCI').val();
+        findAllJobs();
+      }
+        
+
+
+      function findAllJobs(){
+	      $.ajaxSetup({"error":function(data) {  
+            console.log(data); 
+            if (data.readyState==4){
+              console.log("erreur 404");
+              $("#error").text('Error 404');
+            }else{
+              $("#error").text();
+            }
+        }});
+	
+        var items = [];
+         $.getJSON(localStorage["urlCI"]+'/api/json?tree=jobs[name]', function(data) {
+              localStorage['jobs']=JSON.stringify(data.jobs);
+              $.each(data.jobs, function(key, val) {
+                if (localStorage.getItem(val.name)){
+                  items.push('<span>'+val.name +' : <input class="jobs" id='+ val.name + ' checked=checked type="checkbox" onclick="updateListBuildToNotificate()"/></span><br/>');
+                }else{
+                  items.push('<span>'+val.name +' : <input class="jobs" id='+ val.name + '  type="checkbox" onclick="updateListBuildToNotificate()"/></span><br/>');
+                }
+                jobs.push(val.name);
+              });
+             
+               $('<div/>', {
+               html: items.join('')
+                }).appendTo('body');
+          });
+          
+          
+      }
+
+
+      
+
+		function updateListBuildToNotificate(){
+			$(".jobs").each(function(key, val){ 
+				if($(this).is(':checked'))
+				{
+				 localStorage[val.id]=true;
+				}else{
+				    localStorage.removeItem(val.id);
+				}
+			});
+		}
+      
+     
+      
+      $(document).ready(function() {
+          $('#timeToRefresh').val(localStorage['timeToRefresh']);
+          $('#urlCI').val(localStorage['urlCI']);
+          findAllJobs();
+      });
+   
+        
+        
+</script>
+<style type="text/css" media="screen">
+	.red{
+		background-color: red;
+	}
+	.yellow{
+		background-color: yellow;
+	}
+	.blue{
+		background-color: blue;
+	}
+	.disabled{
+  background-color: grey;
+  }
+</style>
+
+
+</head>
+<body>
+  <h1>C.I. Monitor</h1>
+  <h2>Options</h2> 
+		<fieldset> 
+	<legend>Basic Setup</legend> 
+    <label for="urlCI">CI URL: </label>
+    <input id="urlCI" name="urlCI" /><span id="error"></span><br/>
+    <label for="timeToRefresh">Refresh time (ms) : </label>
+    
+    <input id="timeToRefresh"/>
+    <button onclick="save_options()">Save</button>
+    </fieldset> 
+    
+    <h2>Tick the boxes to monitor builds bellow : </h2>
+   
+</body>
+</html>

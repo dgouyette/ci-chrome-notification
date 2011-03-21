@@ -1,0 +1,19 @@
+{
+				 "name": "ci-chrome-notification",  
+				 "background_page": "background.htm",
+				 "version": "0.1.2",  
+				 "description": "Permet d etre notifie des changements d etats d un build",
+          "permissions": [
+            "tabs", "http://*/*","https://*/*",
+            "notifications"
+          ],
+          "content_scripts": [
+          {
+          "matches": ["http://jquery.com/*"],
+          "js": ["jquery-1.5.1.min.js"]
+        }
+  ],      
+				 "default_title": "ci-chrome-notification",
+				 "options_page": "options.htm"
+				
+}
