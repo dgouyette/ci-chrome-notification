@@ -1,6 +1,6 @@
-h1. Introduction
+= Introduction
 
-h2. Utiliser la version non empaquetée
+== Utiliser la version non empaquetée
 
 Récupérer les sources : 
 
@@ -14,7 +14,7 @@ En haut à doit cliquer sur le "mode développeur"
 
 Cliquer ensuite sur le bouton "Charger l'extension non empaquetée" et sélectionner l'emplacement ou vous avez cloné le repo git  
 
-h2. Utiliser l'extension via le google chrome store
+== Utiliser l'extension via le google chrome store
 
 L'extension est disponible en téléchargement ici   : https://chrome.google.com/extensions/detail/kbgdbodpeimjhldaelnhmmffkbdacbln?hl=fr
 
