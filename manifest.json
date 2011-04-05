@@ -1,19 +1,24 @@
 {
-				 "name": "ci-chrome-notification",  
-				 "background_page": "background.htm",
-				 "version": "0.1.2",  
-				 "description": "Permet d etre notifie des changements d etats d un build",
-          "permissions": [
-            "tabs", "http://*/*","https://*/*",
-            "notifications"
-          ],
-          "content_scripts": [
-          {
-          "matches": ["http://jquery.com/*"],
-          "js": ["jquery-1.5.1.min.js"]
+    "background_page": "background.htm",
+    "content_scripts": [
+        {
+            "js": [ "jquery-1.5.1.min.js" ],
+            "matches": [ "http://jquery.com/*" ]
         }
-  ],      
-				 "default_title": "ci-chrome-notification",
-				 "options_page": "options.htm"
-				
+    ],
+    "default_title": "ci-chrome-notification",
+    "description": "Permet d etre notifie des changements d etats d un build",
+    "browser_action": {
+        "default_icon": "CI.png",
+        "popup": "options.htm"
+    },
+    "icons": {
+        "128": "CI.png"
+    },
+    "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKJjt0QxwrbleCgZV+kk87QOqBN7vVLBeImqqXC5T5bjMosIiaR1mqXMIbusefBiDnjjhnPIgtUdvAvbvDKPMqTH7wmhvT34kjFN13xt+r+UEbxKLnZ0yEG+vuZzEuo5ol9wPws4oTYFh6NSqpjvPMueSaOqfi0Izx4siA95RXQQIDAQAB",
+    "name": "ci-chrome-notification",
+    "options_page": "options.htm",
+    "permissions": [ "tabs", "http://*/*", "https://*/*", "notifications" ],
+    "update_url": "http://clients2.google.com/service/update2/crx",
+    "version": "0.1.2"
 }
