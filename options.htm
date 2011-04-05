@@ -78,9 +78,9 @@
                 console.log(data);
                 if (data.readyState == 4) {
                     console.log("erreur 404");
-                    $("#error").text('Error 404');
+                    $("#saveError").text('Error 404: CI not found');
                 } else {
-                    $("#error").text();
+                    $("#saveError").html("&nbsp;");
                 }
             }});
 
@@ -161,7 +161,8 @@
 <fieldset>
     <legend>Basic Setup</legend>
     <label for="urlCI">CI URL: </label>
-    <input id="urlCI" name="urlCI"/><span id="error"></span><br/>
+    <input id="urlCI" name="urlCI"/>
+    <br/>
     <label for="timeToRefresh">Refresh time (ms) : </label>
     <input id="timeToRefresh"/>
     <button id="save_btn" onclick="save_options()">Save</button>
