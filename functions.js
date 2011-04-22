@@ -18,25 +18,26 @@ function findAllJobsByViewId(viewID){
 		$.getJSON(localStorage["urlCI"]+'/view/'+viewID+"/api/json/", function(data) {
 			var cleanViewID=cleanForId(viewID);
 			$.each(data.jobs, function(key, val) {
-				var buildID = cleanForId(val.name);
-				if(jobs[buildID]){
-					$("#"+cleanViewID).append('<span><input class="jobs" id=' + buildID + ' checked=checked type="checkbox"/>&nbsp;' + buildID + '</span><br/>');					
+				var buildID = val.name;
+				jobs = JSON.parse(localStorage.jobs);
+				//if (jQuery.contains(jobs,buildID )) {
+				if($.inArray(buildID, jobs)!=-1){
+					$("#"+cleanViewID).append('<span><input class="jobs" id=' + buildID + ' onclick="updateListBuildToNotificate()"  checked=checked type="checkbox"/>&nbsp;' + buildID + '</span><br/>');					
 				}
 				else{
-					$("#"+cleanViewID).append('<span><input class="jobs" id=' + buildID + ' type="checkbox"/>&nbsp;' + buildID + '</span><br/>');										
-			}	
+					$("#"+cleanViewID).append('<span><input class=jobs id=' + buildID + ' onclick="updateListBuildToNotificate()" type="checkbox"/>&nbsp;' + buildID + '</span><br/>');										
+				}	
 			}); 
 		});	
 }
 
 
- function updateListBuildToNotificate() {
-		/**var jobs = $.makeArray(localStorage.jobs);
-		$(".jobs:checked").each(function(key, val){
-			jobs[val.id]=true;
-		});
-		$(".jobs :not(:checked)").each(function(key, val){
-			jobs[val.id]=false;
-		});
-		localStorage.jobs=JSON.stringify(jobs);**/
+ function updateListBuildToNotificate(viewID) {
+		localStorage.jobs = $(".jobs:checked");
+		var idOfCheckedInput = []; 
+		$(".jobs:checked").each(function(index, domEle){
+			idOfCheckedInput[index]=domEle.id;
+		})
+		localStorage.jobs=JSON.stringify(idOfCheckedInput);
+		console.log(localStorage.jobs);
     }

@@ -4,9 +4,7 @@
     <script type="text/javascript">
         var urlCI = localStorage.urlCI;
 		var jobs = [];
-        if (localStorage.jobs) {
-            jobs = localStorage.jobs;
-        }
+       
         var defaultTimeToRefresh = 10000;
         var previousState = [];
 
@@ -33,39 +31,44 @@
             }
             previousState[jobName] = color;
         }
-
-		function updateJobStatus(){
-			console.log("updateJobStatus");
+		
+		
+		function updateParams(){	 	
+			 if (localStorage.jobs) {
+		            jobs = JSON.parse(localStorage.jobs);
+		     }
 		}
+	
 
-        /**function updateJobStatus() {
+        function updateJobStatus() {
 			console.log("updateJobStatus");
+			console.log(jobs);
             $.each(jobs, function(key, val) {
 
-                var jobId = encodeURIComponent(val.name);
-
-                if (localStorage[jobId]) {
-
+                var jobId = val;
+                if (jQuery.contains(jobs,jobId )) {
+				
                     $.getJSON(urlCI + "job/" + jobId + "/api/json/", function(data) {
-
+						console.log(urlCI + "job/" + jobId + "/api/json/");
                         var description = "";
                         $.each(data.healthReport, function(index, value) {
                             description += value.description;
                         });
                         var color = data.color.replace("_anime", "");
-                        console.log("updated : " + val.name + ", color : " + color);
-                        notifyIfStatusChange(val.name, color, description, data.healthReport[0] ? data.healthReport[0].iconUrl : null);
+                        console.log("updated : " + jobId + ", color : " + color);
+                        notifyIfStatusChange(jobId, color, description, data.healthReport[0] ? data.healthReport[0].iconUrl : null);
                     });
                 }
             });
             setTimeout(updateJobStatus, localStorage.timeToRefresh ? localStorage.timeToRefresh : defaultTimeToRefresh);
             setTimeout(updateParams, localStorage.timeToRefresh ? localStorage.timeToRefresh : defaultTimeToRefresh);
-        }**/
+        }
 
        
 
         $(document).ready(function() {
             window.setTimeout(updateJobStatus, localStorage.timeToRefresh ? localStorage.timeToRefresh : defaultTimeToRefresh);
+			updateParams();
         });
 
 
