@@ -15,13 +15,16 @@ function findAllViews(){
 
 //Find all jbos for a given view
 function findAllJobsByViewId(viewID){
-		$.getJSON(localStorage["urlCI"]+'/view/'+viewID+"/api/json/", function(data) {
+	$.getJSON(localStorage["urlCI"]+'/view/'+viewID+"/api/json/", function(data) {
 			var cleanViewID=cleanForId(viewID);
 			$.each(data.jobs, function(key, val) {
 				var buildID = val.name;
-				jobs = JSON.parse(localStorage.jobs);
-				//if (jQuery.contains(jobs,buildID )) {
+				if (localStorage.jobs){
+					jobs = JSON.parse(localStorage.jobs);
+				}
+				
 				if($.inArray(buildID, jobs)!=-1){
+					
 					$("#"+cleanViewID).append('<span><input class="jobs" id=' + buildID + ' onclick="updateListBuildToNotificate()"  checked=checked type="checkbox"/>&nbsp;' + buildID + '</span><br/>');					
 				}
 				else{
