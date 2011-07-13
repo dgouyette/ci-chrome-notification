@@ -25,6 +25,7 @@
             }
 
 
+			console.log(jobName+" = "+description);
             if (previousState[jobName] != color && previousState[jobName] != null) {
                 var notification = webkitNotifications.createNotification(chrome.extension.getURL(pictureUrl), jobName, description);
                 notification.show();
@@ -33,7 +34,7 @@
         }
 		
 		
-		function updateParams(){	 	
+		function updateParams(){	 
 			 if (localStorage.jobs) {
 		            jobs = JSON.parse(localStorage.jobs);
 		     }
@@ -41,8 +42,6 @@
 	
 
         function updateJobStatus() {
-			console.log("updateJobStatus");
-			console.log(jobs);
             $.each(jobs, function(key, val) {
 
                 var jobId = val;
@@ -54,6 +53,8 @@
                         $.each(data.healthReport, function(index, value) {
                             description += value.description;
                         });
+						description += "console ="+ data.builds[0].url
+
                         var color = data.color.replace("_anime", "");
                         console.log("updated : " + jobId + ", color : " + color);
                         notifyIfStatusChange(jobId, color, description, data.healthReport[0] ? data.healthReport[0].iconUrl : null);
