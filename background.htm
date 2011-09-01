@@ -52,8 +52,11 @@
                         var description = "";
                         $.each(data.healthReport, function(index, value) {
                             description += value.description;
+						
                         });
-						description += "console ="+ data.builds[0].url
+						if (data.builds[0]){
+						description += "console ="+ data.builds[0].url;
+						}
 
                         var color = data.color.replace("_anime", "");
                         console.log("updated : " + jobId + ", color : " + color);
