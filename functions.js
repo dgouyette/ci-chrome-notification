@@ -22,7 +22,6 @@ function findAllJobsByViewId(viewID){
 				if (localStorage.jobs){
 					jobs = JSON.parse(localStorage.jobs);
 				}
-				
 				if($.inArray(buildID, jobs)!=-1){
 					
 					$("#"+cleanViewID).append('<span><input class="jobs" id=' + buildID + ' onclick="updateListBuildToNotificate()"  checked=checked type="checkbox"/>&nbsp;' + buildID + '</span><br/>');					

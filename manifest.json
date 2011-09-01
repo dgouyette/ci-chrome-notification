@@ -9,15 +9,15 @@
     "default_title": "ci-chrome-notification",
     "description": "Permet d etre notifie des changements d etats d un build",
     "browser_action": {
-        "default_icon": "CI.png",
+        "default_icon": "favicon.ico",
         "popup": "options.htm"
     },
     "icons": {
-        "128": "CI.png"
+        "128": "favicon.ico"
     },
     "name": "ci-chrome-notification",
     "options_page": "options.htm",
     "permissions": [ "tabs", "http://*/*", "https://*/*", "notifications" ],
     "update_url": "http://clients2.google.com/service/update2/crx",
-    "version": "0.3.1"
+    "version": "0.3.2"
 }
