@@ -18,6 +18,6 @@
     "options_page": "options.htm",
     "permissions": [ "tabs", "http://*/*", "https://*/*", "notifications" ],
     "update_url": "http://clients2.google.com/service/update2/crx",
-    "version": "0.3.3",
+    "version": "0.3.4",
      "manifest_version": 2
 }
