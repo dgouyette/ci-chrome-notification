@@ -56,47 +56,7 @@
 	<script src='jquery-ui-1.8.11.custom.min.js'></script>
 	<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.11.custom.css" rel="Stylesheet" />  
 	<script src='functions.js'></script>
-    <script type="text/javascript">
-        var req;
-        var jobs = [];
-        var data;
-
-        function save_options() {
-            $('#saveError').html("&nbsp;");
-            var numRegExp = /(^-?\d\d*$)/;
-            var t2r = $('#timeToRefresh').val();
-            if (!numRegExp.test(t2r)) {
-                console.log("Bad Value for Refresh Time");
-                $('#saveError').text("Bad Value for Refresh Time");
-
-            } else {
-                localStorage.timeToRefresh = t2r;
-                var urlCITmp = $('#urlCI').val();
-                var urlCI = urlCITmp[urlCITmp.length - 1] == "/" ? urlCITmp : urlCITmp + "/";
-                $('#urlCI').attr("value", urlCI);
-                localStorage.urlCI = urlCI;
-				findAllViews();
-            }
-        }
-
-
-		function reset(){
-			localStorage.clear();
-		}
-       
-
-
-        $(document).ready(function() {
-            if (localStorage['timeToRefresh']) {
-                $('#timeToRefresh').val(localStorage['timeToRefresh']);
-                $('#urlCI').val(localStorage['urlCI']);
-				$('#tabs').tabs();
-				findAllViews();
-            }
-        });
-
-
-    </script>
+    <script src="options.js"></script>
     <style type="text/css" media="screen">
         .red {
             background-color: red;
@@ -129,8 +89,8 @@
     <br/>
     <label for="timeToRefresh">Refresh time (ms) : </label>
     <input id="timeToRefresh"/>
-    <button id="save_btn" onclick="save_options()">Save</button>
-	<button id="reset_btn" onclick="reset()">Reset</button>
+    <button id="save_btn">Save</button>
+	<button id="reset_btn">Reset</button>
 </fieldset>
 <br/>
 

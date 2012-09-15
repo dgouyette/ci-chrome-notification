@@ -24,14 +24,23 @@ function findAllJobsByViewId(viewID){
 				}
 				if($.inArray(buildID, jobs)!=-1){
 					
-					$("#"+cleanViewID).append('<span><input class="jobs" id=' + buildID + ' onclick="updateListBuildToNotificate()"  checked=checked type="checkbox"/>&nbsp;' + buildID + '</span><br/>');					
+					$("#"+cleanViewID).append('<span><input class="jobs" id=' + buildID + '   checked=checked type="checkbox"/>&nbsp;' + buildID + '</span><br/>');					
 				}
 				else{
-					$("#"+cleanViewID).append('<span><input class=jobs id=' + buildID + ' onclick="updateListBuildToNotificate()" type="checkbox"/>&nbsp;' + buildID + '</span><br/>');										
+					$("#"+cleanViewID).append('<span><input class=jobs id=' + buildID + '  type="checkbox"/>&nbsp;' + buildID + '</span><br/>');										
 				}	
+
+				$(":checkbox").click(function(){
+					var viewID =this.parentNode.parentNode.id
+					updateListBuildToNotificate(viewID)
+                	
+            	});
 			}); 
 		});	
+
+
 }
+
 
 
  function updateListBuildToNotificate(viewID) {
