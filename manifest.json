@@ -1,12 +1,11 @@
 {
-    "background_page": "background.htm",
+     "background": { "page": "background.htm" },
     "content_scripts": [
         {
             "js": [ "jquery-1.5.1.min.js","jquery-ui-1.8.11.custom.min.js", "functions.js" ],
             "matches": [ "http://jquery.com/*" ]
         }
     ],
-    "default_title": "ci-chrome-notification",
     "description": "Permet d etre notifie des changements d etats d un build",
     "browser_action": {
         "default_icon": "favicon.ico",
@@ -19,5 +18,6 @@
     "options_page": "options.htm",
     "permissions": [ "tabs", "http://*/*", "https://*/*", "notifications" ],
     "update_url": "http://clients2.google.com/service/update2/crx",
-    "version": "0.3.2"
+    "version": "0.3.3",
+     "manifest_version": 2
 }
