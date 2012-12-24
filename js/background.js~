@@ -39,8 +39,9 @@
 
         function updateJobStatus() {
             $.each(jobs, function(key, val) {
-
                 var jobId = val;
+		//console.log(jobId);
+		console.log(jQuery.contains(jobs,jobId));
                 if (jQuery.contains(jobs,jobId )) {
 				
                     $.getJSON(urlCI + "job/" + jobId + "/api/json/", function(data) {
@@ -66,6 +67,7 @@
 
 
         $(document).ready(function() {
+		console.log("dom ready");
             window.setTimeout(updateJobStatus, localStorage.timeToRefresh ? localStorage.timeToRefresh : defaultTimeToRefresh);
             updateParams();
         });

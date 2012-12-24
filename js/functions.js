@@ -4,11 +4,25 @@ function cleanForId(toClean){
 	
 //find all views and fill each one with corresponding builds
 function findAllViews(){
+
 	$.getJSON(localStorage["urlCI"]+'/api/json', function(data) {
+		var counter = 1;
 		$.each(data.views, function(key, val) {
 			var cleanViewID = cleanForId(val.name);
 			findAllJobsByViewId(val.name);
-			$("#tabs").tabs("add","#"+cleanViewID, cleanViewID);
+			if (counter==1){
+				$('#allViews').append($('<li/>').attr('class', 'active').append($('<a>'+cleanViewID+'</a>').attr('data-toggle', 'tab').attr('href', '#'+cleanViewID)));
+				$(".tab-content").append($('<div class="active">').addClass('tab-pane').attr('id', cleanViewID));
+			
+				
+			}else{
+				$('#allViews').append($('<li/>').append($('<a>'+cleanViewID+'</a>').attr('data-toggle', 'tab').attr('href', '#'+cleanViewID)));
+				$(".tab-content").append($('<div/>').addClass('tab-pane').attr('id', cleanViewID));
+			
+			}
+
+			 counter++;
+
 		});
 	});
 }
@@ -21,18 +35,18 @@ function findAllJobsByViewId(viewID){
 				var buildID = val.name;
 				if (localStorage.jobs){
 					jobs = JSON.parse(localStorage.jobs);
+
 				}
 				if($.inArray(buildID, jobs)!=-1){
-					
-					$("#"+cleanViewID).append('<span><input class="jobs" id=' + buildID + '   checked=checked type="checkbox"/>&nbsp;' + buildID + '</span><br/>');					
+					$("#"+cleanViewID).append('<span><input class="jobs" name="'+buildID+'" checked=checked type="checkbox"/>&nbsp;' + buildID + '<br/><span>');				
 				}
-				else{
-					$("#"+cleanViewID).append('<span><input class=jobs id=' + buildID + '  type="checkbox"/>&nbsp;' + buildID + '</span><br/>');										
+				else{			
+					$("#"+cleanViewID).append('<input class=jobs name="'+buildID+'"    type="checkbox"/>&nbsp;' + buildID+ '<br/>');	
+										
 				}	
 
-				$(":checkbox").click(function(){
-					var viewID =this.parentNode.parentNode.id
-					updateListBuildToNotificate(viewID)
+				$(":checkbox").click(function(){		
+					updateListBuildToNotificate(this.name)
                 	
             	});
 			}); 
@@ -47,8 +61,8 @@ function findAllJobsByViewId(viewID){
 		localStorage.jobs = $(".jobs:checked");
 		var idOfCheckedInput = []; 
 		$(".jobs:checked").each(function(index, domEle){
-			idOfCheckedInput[index]=domEle.id;
+			idOfCheckedInput[index]=domEle.name;
 		})
 		localStorage.jobs=JSON.stringify(idOfCheckedInput);
-		console.log(localStorage.jobs);
+
     }

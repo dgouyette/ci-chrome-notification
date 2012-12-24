@@ -37,7 +37,7 @@
 					<div class="control-group">
 						<label class="control-label" for="inputEmail">Refresh time (ms) : </label>
 						<div class="controls">
-							<input  type="text" class="input-small"  id="timeToRefresh" placeholder="10000">
+							<input type="text" id="timeToRefresh" placeholder="10000">
 						</div>
 					</div>
 					<div class="control-group">
