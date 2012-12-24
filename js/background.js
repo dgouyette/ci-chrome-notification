@@ -40,9 +40,7 @@
         function updateJobStatus() {
             $.each(jobs, function(key, val) {
                 var jobId = val;
-		//todo a faire avec underscore.js
-		console.log(jQuery.contains(jobs,jobId));
-                if (jQuery.contains(jobs,jobId )) {
+                if (_.contains(jobs,jobId )) {
 				
                     $.getJSON(urlCI + "job/" + jobId + "/api/json/", function(data) {
 						console.log(urlCI + "job/" + jobId + "/api/json/");
