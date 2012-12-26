@@ -22,7 +22,7 @@
 
 
             if (previousState[jobName] != color && previousState[jobName]) {
-		console.log(chrome.extension.getURL('img/'+pictureUrl));
+		
                 var notification = webkitNotifications.createNotification(chrome.extension.getURL('img/'+pictureUrl), jobName, description);
                 notification.show();
             }
