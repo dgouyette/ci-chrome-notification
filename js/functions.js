@@ -35,13 +35,12 @@ function findAllJobsByViewId(viewID){
 				var buildID = val.name;
 				if (localStorage.jobs){
 					jobs = JSON.parse(localStorage.jobs);
-
 				}
 				if($.inArray(buildID, jobs)!=-1){
-					$("#"+cleanViewID).append('<span><input class="jobs" name="'+buildID+'" checked=checked type="checkbox"/>&nbsp;' + buildID + '<br/><span>');				
+					$("#"+cleanViewID).append('<span class="'+val.color+'"><input class="jobs" name="'+buildID+'" checked=checked type="checkbox"/>&nbsp;' + buildID + '<br/><span>');				
 				}
 				else{			
-					$("#"+cleanViewID).append('<input class=jobs name="'+buildID+'"    type="checkbox"/>&nbsp;' + buildID+ '<br/>');	
+					$("#"+cleanViewID).append('<span class="'+val.color+'"><input class=jobs name="'+buildID+'"    type="checkbox"/>&nbsp;' + buildID+ '<br/></span>');	
 										
 				}	
 
@@ -49,6 +48,11 @@ function findAllJobsByViewId(viewID){
 					updateListBuildToNotificate(this.name)
                 	
             	});
+            $(".disabled").addClass("muted");
+            $(".yellow").addClass("text-warning");
+            $(".blue").addClass("text-success");
+            $(".red").addClass("text-error");
+            $(".blue_anime").addClass("text-info");
 			}); 
 		});	
 

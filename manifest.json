@@ -6,7 +6,7 @@
             "matches": [ "http://jquery.com/*" ]
         }
     ],
-    "description": "Send chome notifications when build s status has changed",
+    "description": "Send chome notifications when jenkins or hudson builds status has changed",
     "browser_action": {
         "default_icon": "favicon.ico",
         "popup": "options.htm",
