@@ -1,6 +1,6 @@
         var urlCI = localStorage.urlCI;
 		var jobs = [];
-       
+
         var defaultTimeToRefresh = 10000;
         var previousState = [];
 
@@ -22,23 +22,27 @@
 
 
             if (previousState[jobName] != color && previousState[jobName]) {
-		
+		        console.log(chrome.extension.getURL('img/'+pictureUrl));
                 var notification = webkitNotifications.createNotification(chrome.extension.getURL('img/'+pictureUrl), jobName, description);
+                 notification.onclick = function () {
+                    window.open(urlCI+'/job/'+jobName+'/lastBuild/console');
+                    notification.close();
+                }
                 notification.show();
             }
             previousState[jobName] = color;
         }
-		
-		
-		function updateParams(){	 
+
+
+		function updateParams(){
 			 if (localStorage.jobs) {
 		            jobs = JSON.parse(localStorage.jobs);
 		     }
 		}
-	
+
 
         function updateJobStatus() {
-		
+
             $.each(jobs, function(key, val) {
                 var jobId = val;
                 if (_.contains(jobs,jobId )) {
@@ -46,7 +50,7 @@
                         var description = "";
                         $.each(data.healthReport, function(index, value) {
                             description += value.description;
-						
+
                         });
 						if (data.builds[0]){
 						description += "console ="+ data.builds[0].url;
